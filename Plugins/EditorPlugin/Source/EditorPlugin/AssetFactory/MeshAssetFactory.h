@@ -1,23 +1,19 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
-#include "Editor/UnrealEd/Classes/Factories/Factory.h"
-#include "OurAssetFactory.generated.h"
+#include "Factories/Factory.h"
+#include "MeshAssetFactory.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
-class EDITORPLUGIN_API UOurAssetFactory : public UFactory
+class EDITORPLUGIN_API UMeshAssetFactory : public UFactory
 {
 	GENERATED_BODY()
-
+	
 public:
-	UOurAssetFactory();
+	
+	UMeshAssetFactory();
 	virtual bool CanCreateNew() const override;
 	virtual bool ShouldShowInNewMenu() const override;
 	virtual UObject* FactoryCreateNew(UClass* InClass, UObject* InParent, FName InName, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn) override;
-	
 };

@@ -25,5 +25,6 @@ public:
 private:
 	// for the details pannel
 	TSharedRef<SDockTab> SpawnDetailTab(const FSpawnTabArgs& SpawnTabArgs) const;
+	TSharedRef<SDockTab> SpawnViewport (const FSpawnTabArgs& SpawnTabArgs) const;
 	TObjectPtr<UEdGraph> EdGraph;
 };

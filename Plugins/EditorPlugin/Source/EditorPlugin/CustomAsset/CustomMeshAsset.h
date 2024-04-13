@@ -2,11 +2,11 @@
 #include "AssetTypeActions_Base.h"
 
 
-class EDITORPLUGIN_API FAssetTypeActions_OurAssets : public FAssetTypeActions_Base
+class EDITORPLUGIN_API FCustomMeshAsset : public FAssetTypeActions_Base
 {
 public:
-	FAssetTypeActions_OurAssets(EAssetTypeCategories::Type Type);
-	
+	FCustomMeshAsset(EAssetTypeCategories::Type Type);
+
 	// Returns the name of the asset.
 	virtual FText GetName() const override;
 	
@@ -22,5 +22,7 @@ public:
 	// Gets the directory for creating assets.
 	virtual uint32 GetCategories() override;
 	
-private:EAssetTypeCategories::Type MyAssetCategory;
+private:
+	EAssetTypeCategories::Type AssetCategory;
+		
 };

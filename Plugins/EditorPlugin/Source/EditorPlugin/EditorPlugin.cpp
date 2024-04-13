@@ -2,6 +2,7 @@
 
 #include "EditorPlugin.h"
 #include "AssetToolsModule.h"
+#include "CustomAsset/CustomMeshAsset.h"
 #include "CustomAsset/OurAsset.h"
 
 #define LOCTEXT_NAMESPACE "FEditorPluginModule"
@@ -24,8 +25,15 @@ void FEditorPluginModule::RegisterAssetsAction()
 {
 	IAssetTools& AssetToolModule = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();
 	const auto Category = AssetToolModule.RegisterAdvancedAssetCategory(FName(TEXT("CustomAssetKey")), NSLOCTEXT("Editor", "Our Category name", "CustomAssets"));
+
+	//creating the custom asset 
 	const TSharedPtr<FAssetTypeActions_OurAssets> AssetsTypeAction = MakeShareable(new FAssetTypeActions_OurAssets(Category));
 	AssetToolModule.RegisterAssetTypeActions(AssetsTypeAction.ToSharedRef());
+
+	//Creating the custom mesh asset
+
+	const TSharedPtr<FCustomMeshAsset> MeshAssetAction = MakeShareable(new FCustomMeshAsset(Category));
+	AssetToolModule.RegisterAssetTypeActions(MeshAssetAction.ToSharedRef());
 }
 
 #undef LOCTEXT_NAMESPACE
