@@ -1,4 +1,6 @@
 ﻿#include "CustomMeshAsset.h"
+
+#include "EditorPlugin/Editor/MeshAssetToolkit.h"
 #include "EditorPlugin/Objects/MeshAsset.h"
 
 FCustomMeshAsset::FCustomMeshAsset(EAssetTypeCategories::Type Type)
@@ -24,7 +26,17 @@ UClass* FCustomMeshAsset::GetSupportedClass() const
 void FCustomMeshAsset::OpenAssetEditor(const TArray<UObject*>& InObjects,
 	TSharedPtr<IToolkitHost> EditWithinLevelEditor)
 {
-	FAssetTypeActions_Base::OpenAssetEditor(InObjects, EditWithinLevelEditor);
+	//FAssetTypeActions_Base::OpenAssetEditor(InObjects, EditWithinLevelEditor);
+	const EToolkitMode::Type ToolKitModeType = EditWithinLevelEditor ? EToolkitMode::WorldCentric : EToolkitMode::Standalone;
+
+	for(auto ObjectIterator = InObjects.CreateConstIterator(); ObjectIterator;++ObjectIterator )
+	{
+		if(UMeshAsset* OurAsset = Cast<UMeshAsset>(*ObjectIterator))
+		{
+			const TSharedRef<FMeshAssetToolkit>MeshAssetToolkit = MakeShareable(new  FMeshAssetToolkit);
+			MeshAssetToolkit->Init(ToolKitModeType,EditWithinLevelEditor,OurAsset);
+		}
+	}
 }
 
 uint32 FCustomMeshAsset::GetCategories()
